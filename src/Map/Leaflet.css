@@ -1,0 +1,98 @@
+/* General container styling for the map */
+#map {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+#map h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Book Now button styling */
+#map button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background-color: #e63946;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+#map button:hover {
+  background-color: #d62828;
+  transform: scale(1.05);
+}
+
+#map button a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Map container styling */
+.leaflet-container {
+  width: 100%;
+  max-width: 1000px;
+  height: 80vh;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Popup styling */
+.leaflet-popup-content {
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.leaflet-popup-tip {
+  background: #333;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Marker icon hover effect */
+.leaflet-marker-icon {
+  transition: transform 0.2s ease-in-out;
+}
+
+.leaflet-marker-icon:hover {
+  transform: scale(1.2);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  #map h1 {
+    font-size: 1.5rem;
+  }
+
+  #map button {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .leaflet-container {
+    height: 60vh;
+  }
+}

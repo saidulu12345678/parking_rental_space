@@ -1,0 +1,109 @@
+/* General Container Styling */
+#book {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Styling */
+  #book1 {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  #book1 form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  #book1 form .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #book1 label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  #book1 input,
+  #book1 select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  #book1 input:focus,
+  #book1 select:focus {
+    border-color: #4caf50;
+  }
+  
+  #int2 {
+    grid-column: span 2;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #int2:hover {
+    background-color: #45a049;
+  }
+  
+  /* Booking Details Table */
+  #booking-details {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  #booking-details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  #booking-details th,
+  #booking-details td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  #booking-details th {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  #booking-details tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  #booking-details tr:hover {
+    background-color: #f1f1f1;
+  }
+  

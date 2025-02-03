@@ -1,0 +1,172 @@
+/* About.css */
+
+/* Review Section */
+#review {
+    background-color: #1a202c; /* Dark gray */
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+#review h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+#maincard {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+#ccard {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    max-width: 300px;
+    text-align: center;
+}
+
+#ccard img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    background-color: #f7f7f7; /* Placeholder color */
+}
+
+#ccard h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+#ccard p {
+    font-size: 0.875rem;
+    color: #555;
+}
+
+/* Get in Touch Section */
+#get {
+    background-color: #f7fafc; /* Light gray */
+    padding: 2rem 0;
+    text-align: center;
+}
+
+#gets h1 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+#gets p {
+    margin: 0.5rem 0;
+    font-size: 0.875rem;
+}
+
+#getss {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#getss input,
+#getss textarea {
+    width: 90%;
+    max-width: 400px;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.875rem;
+}
+
+#getss button {
+    background-color: #3182ce; /* Blue */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+#getss button:hover {
+    background-color: #2b6cb0; /* Darker blue */
+}
+
+/* Footer Section */
+#footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  #footers {
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+  }
+  
+  #footers h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #f4b400;
+  }
+  
+  #footers p {
+    font-size: 1rem;
+    margin: 5px 0;
+    line-height: 1.5;
+  }
+  
+  #footeri {
+    margin-top: 15px;
+  }
+  
+  #footeri span {
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  #footeri span:hover {
+    color: #f4b400;
+  }
+  
+  #footeri i {
+    margin-right: 5px;
+  }
+  
+  #footer a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+  }
+  
+  #footer a:hover {
+    color: #f4b400;
+  }
+  
+  @media (max-width: 768px) {
+    #footer {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    #footers {
+      margin-bottom: 20px;
+    }
+  }
+  
