@@ -1,103 +1,224 @@
-/* Header styles */
+/* ===== Header Styles ===== */
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    background-color: #94c3cb;
-    border-bottom: 1px solid #ccc;
-    font-weight: bolder;
-  }
-  
-  .logo {
-    width: 100px;
-    height: auto;
-    cursor: pointer;
-    border-radius: 50px;
-  }
-  
-  /* Navbar styles */
-  .navbar {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    gap: 70px;
-  }
-  
-  .navbar .nav2 {
-    font-size: x-large;
-    padding: 10px; /* Set consistent padding */
-    border-radius: 10px; /* Add rounded corners */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
-  }
-  
-  .nav2:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
-    background-color: rgb(177, 228, 203); /* Change background color on hover */
-  }
-  
-  .navbar .nav2 button {
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
-  
-  /* Hamburger styles */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 15px;
+  background-color: black;
+  border-bottom: 1px solid #15142c;
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+}
+
+.logo {
+  width: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* ===== Navbar Styles ===== */
+.navbar {
+  display: flex;
+  gap: 50px;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  transition: 0.3s;
+  padding: 5px 10px;
+  border: 2px solid;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.nav-item:hover {
+  color: black;
+  background-color: white;
+}
+
+/* ===== Profile Icon & Dropdown ===== */
+.profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.profile-btn:hover {
+  color: black;
+  background-color: white;
+}
+
+/* Keeps the profile dropdown open when clicked */
+.profile-container:focus-within .profile-dropdown {
+  display: flex;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  min-width: 170px;
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to right, #dce7e7, rgb(56, 59, 56));
+  z-index: 200;
+}
+
+.dropdown-item {
+  text-decoration: none;
+  color: black;
+  padding: 8px 12px;
+  width: 100%;
+  text-align: center;
+  background: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.dropdown-item:hover {
+  color: white;
+  background: black;
+}
+
+/* Keeps dropdown open when clicked */
+.profile-container:focus-within .profile-dropdown {
+  display: flex;
+}
+
+/* ===== Desktop Login Button (if not logged in) ===== */
+.desktop-login-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 700;
+  padding: 5px 10px;
+  border: 2px solid;
+  border-radius: 10px;
+}
+
+.desktop-login-btn:hover {
+  color: black;
+  background-color: white;
+}
+
+/* ===== Hamburger & Mobile Menu ===== */
+.hamburger {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.hamburger:hover {
+  background-color: whitesmoke;
+  color: black;
+}
+
+.ham_login {
+  display: none;
+}
+
+/* ===== Responsive: Mobile (≤768px) ===== */
+@media (max-width: 768px) {
   .hamburger {
+    display: block;
+  }
+
+  .ham_login {
+    display: block;
+    background-color: black;
+  }
+
+  .ham_login:hover {
+    background-color: white;
+    color: black;
+  }
+
+  .desktop-login-btn {
     display: none;
-    font-size: 24px;
+  }
+
+  .navbar {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    background: black;
+    padding: 15px;
+    border-radius: 5px;
+    width: 200px;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .navbar.show {
+    display: flex;
+  }
+
+  /* Ensure menu items are displayed one on top of the other */
+  .nav-item {
+    font-size: 16px;
+    padding: 8px;
+    width: 100%;
+    text-align: center;
+    border: none;
     background: none;
+  }
+
+  .nav-item:hover {
+    color: brown;
+    background-color: white;
+  }
+
+  /* Logout button styling */
+  .logout-item {
+    font-size: 16px;
+    padding: 8px;
+    width: 100%;
+    text-align: center;
+    background: none;
+    color: white;
     border: none;
     cursor: pointer;
   }
-  
-  /* Responsive styles */
-  @media (max-width: 768px) {
-    .hamburger {
-      display: block;
-    }
-  
-    .navbar {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 80px;
-      right: 20px;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      width: 200px;
-      gap: 0px;
-      align-items: center;
-     
-    }
-  
-    .navbar.show {
-      display: flex;
-    }
-  
-    .navbar .nav2 {
-      font-size: 14px;
-      margin: 5px 0;
-      font-size: large;
-    }
-  
-    .logo {
-      width: 80px;
-    }
+
+  .logout-item:hover {
+    color: black;
+    background-color: white;
   }
-  
-  @media (max-width: 480px) {
-    .logo {
-      width: 70px;
-    }
-  
-    .navbar .nav2 {
-      font-size: 12px;
-    }
+
+  /* Hide profile container in mobile */
+  .profile-container {
+    display: none;
   }
-  
+
+  .profile-dropdown {
+    display: none;
+  }
+}

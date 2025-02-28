@@ -1,46 +1,88 @@
 /* Home Section Styling */
 #home1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* Full-screen height */
-    background-image: url(''); /* Replace with your image URL */
-    background-size: cover; /* Make the image cover the entire background */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Prevent repetition */
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full-screen height */
+  background-image: url('https://www.basichomeloan.com/blog/wp-content/uploads/2024/08/Parking_Rules_Banner.jpg'); 
+  background-size: 55.8% 37%;
+  background-position: center; 
+  background-repeat: no-repeat;
+  z-index: 1;
+  transition: background-size 0.5s ease-in-out;
   
+  color: #000000;
+  text-align: center;
+  padding: 20px;  
+  background-blend-mode: darken;
+  background-color: #dce7e7;
+}
+
+/* Hover effect */
+#home1:hover {
+  background-size: 110%; /* Slight enlargement on hover */
+}
+
+/* Home Content */
+#home {
+  max-width: 800px;
+  padding: 20.3px;
+  background: rgba(255, 255, 255, 0.6); /* Semi-transparent for better readability */
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(15, 1, 1, 0.3);
+}
+
+/* Headings */
+#home h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+#home h5 {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #004466;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 1024px) {
+  #home1 {
+      height: 100vh;
+      background-size: cover;
+  }
   #home {
-    max-width: 800px; /* Centered content width */
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background for readability */
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+      max-width: 90%;
   }
-  
+}
+
+@media (max-width: 768px) {
+  #home1 {
+      background-size: cover;
+      background-position: center;
+      height: 90vh;
+      padding: 10px;
+  }
   #home h1 {
-    font-size: 2.5rem; /* Large headline */
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+      font-size: 2rem;
   }
-  
   #home h5 {
-    font-size: 1.2rem; /* Subheading size */
-    line-height: 1.6; /* Better readability */
-    color: #e0e0e0; /* Slightly lighter text for contrast */
+      font-size: 1rem;
   }
-  
-  @media (max-width: 768px) {
-    #home h1 {
-      font-size: 2rem; /* Adjust headline size for smaller screens */
-    }
-  
-    #home h5 {
-      font-size: 1rem; /* Adjust subheading size for smaller screens */
-    }
+}
+
+@media (max-width: 480px) {
+  #home1 {
+      background-size: cover;
+      background-position: center;
+      height: 85vh;
+      padding: 5px;
   }
-  
+  #home h1 {
+      font-size: 1.8rem;
+  }
+  #home h5 {
+      font-size: 0.9rem;
+  }
+}

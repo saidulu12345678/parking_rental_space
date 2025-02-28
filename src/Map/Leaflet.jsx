@@ -1,16 +1,20 @@
 import { MapContainer, Marker, TileLayer, Popup, useMap } from "react-leaflet";
 import { useState, useEffect } from "react";
-import "leaflet/dist/leaflet.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import "leaflet-routing-machine";
+import { CircleArrowLeft } from "lucide-react";
+
 import "./Leaflet.css";
 
 function Maps() {
-  const [location, setLocation] = useState(null); // User's current location
-  const [destination, setDestination] = useState(null); // Selected parking destination
+  const [location, setLocation] = useState(null);
+  const [destination, setDestination] = useState(null);
+  const [markers, setMarkers] = useState([]); // Stores dynamic markers
+  const navigate = useNavigate();
 
-  // Fetch user's location using geolocation
+  // ✅ Fetch user's current location
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -29,19 +33,15 @@ function Maps() {
     }
   }, []);
 
-  // List of parking markers
-  const markers = [
-    { geocode: [17.493559, 78.401049], name: "KPHB metro parking 2" },
-    { geocode: [17.49381701389911, 78.40167110903306], name: "KPHB Metro Parking1" },
-    { geocode: [17.493407708610082, 78.40402072408364], name: "Chennai Shopping Mall Parking" },
-    { geocode: [17.485200121754275, 78.38924647917835], name: "Nexus Mall Parking" },
-    { geocode: [17.486018768563582, 78.41121913487157], name: "Kukatpally Metro Parking" },
-    { geocode: [17.501405354941532, 78.38658989180439], name: "Bramarambha Cinema Hall Parking" },
-    { geocode: [17.490989476734956, 78.39300605166709], name: "Lulu Mall Parking" },
-    // {geocode :[],name :""}
-  ];
+  // ✅ Fetch parking locations from backend
+  useEffect(() => {
+    fetch("https://backend-parkpay.onrender.com/parking")
+      .then((res) => res.json())
+      .then((data) => setMarkers(data))
+      .catch((err) => console.error("Error fetching parking locations:", err));
+  }, []);
 
-  // Icons for markers
+  // Custom Icons for User & Parking Spots
   const customIcon = new L.Icon({
     iconUrl: "https://www.svgrepo.com/show/509483/parking.svg",
     iconSize: [38, 38],
@@ -52,60 +52,75 @@ function Maps() {
     iconSize: [38, 38],
   });
 
-  // Handle marker click to set destination
+  // ✅ Handle Click on Parking Marker
   const onMarkerClick = (marker) => {
-    setDestination(marker.geocode);
+    setDestination([marker.latitude, marker.longitude]); // Correctly update destination
   };
 
-  // RoutingControl component to display routes on the map
-  const RoutingControl = () => {
+  // ✅ Routing for Navigation
+  const RoutingControl = ({ location, destination }) => {
     const map = useMap();
 
     useEffect(() => {
-      if (destination && location) {
-        const route = L.Routing.control({
-          waypoints: [
-            L.latLng(location.latitude, location.longitude),
-            L.latLng(destination[0], destination[1]),
-          ],
-          lineOptions: {
-            styles: [{ color: "blue", weight: 4 }],
-          },
-          addWaypoints: false,
-          draggableWaypoints: false,
-        }).addTo(map);
+      if (!location || !destination) return;
 
-        return () => {
-          map.removeControl(route);
-        };
-      }
-    }, [map, destination, location]);
+      const routingControl = L.Routing.control({
+        waypoints: [
+          L.latLng(location.latitude, location.longitude), // Start Point
+          L.latLng(destination[0], destination[1]), // Destination
+        ],
+        lineOptions: {
+          styles: [{ color: "blue", weight: 4 }],
+        },
+        addWaypoints: false,
+        draggableWaypoints: false,
+        fitSelectedRoutes: true, // Automatically adjust view
+      }).addTo(map);
+
+      return () => {
+        map.removeControl(routingControl); // Remove old route on update
+      };
+    }, [map, location, destination]);
 
     return null;
   };
 
-  // Show a loading message if the user's location is not yet available
   if (!location) {
     return <div>Loading your location...</div>;
   }
 
   return (
     <div id="map" className="text-center bg-gray-100 py-4">
+      <button id="back-button" onClick={() => navigate("/")} title="Go back">
+        <CircleArrowLeft size={30} />
+      </button>
+
       <h1 style={{ color: "black" }}>Map with User Location</h1>
+
       <button
+        id="book-button"
         style={{
-          width: 200,
+          width: 250,
           height: 50,
-          backgroundColor: "red",
+          backgroundColor: destination ? "red" : "gray",
           color: "white",
           border: "none",
           borderRadius: "5px",
+          fontSize: "20px",
+          cursor: destination ? "pointer" : "not-allowed",
         }}
+        disabled={!destination}
       >
-        <Link to={"/Service/Book"} style={{ color: "white", textDecoration: "none" }}>
-          Book Now
-        </Link>
+        {destination ? (
+          <Link to={"/Service/Book"} className="book-now">
+            Book Now
+          </Link>
+        ) : (
+          "Select a location first"
+        )}
       </button>
+
+      {/* ✅ Leaflet Map */}
       <MapContainer
         center={[location.latitude, location.longitude]}
         zoom={16}
@@ -115,22 +130,33 @@ function Maps() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
+        {/* ✅ User's Current Location Marker */}
         <Marker position={[location.latitude, location.longitude]} icon={userIcon}>
           <Popup>Your Location</Popup>
         </Marker>
+
+        {/* ✅ Dynamic Parking Locations */}
         {markers.map((marker, index) => (
           <Marker
             key={index}
-            position={marker.geocode}
+            position={[marker.latitude, marker.longitude]}
             icon={customIcon}
-            eventHandlers={{
-              click: () => onMarkerClick(marker),
-            }}
+            eventHandlers={{ click: () => onMarkerClick(marker) }}
           >
             <Popup>{marker.name}</Popup>
           </Marker>
         ))}
-        <RoutingControl />
+
+        {/* ✅ Show Destination Marker When Selected */}
+        {destination && (
+          <Marker position={destination} icon={customIcon}>
+            <Popup>Destination</Popup>
+          </Marker>
+        )}
+
+        {/* ✅ Routing for Navigation */}
+        <RoutingControl location={location} destination={destination} />
       </MapContainer>
     </div>
   );

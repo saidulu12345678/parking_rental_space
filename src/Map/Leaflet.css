@@ -12,18 +12,18 @@
 
 /* Header styling */
 #map h1 {
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #333;
   margin-bottom: 20px;
 }
 
 /* Book Now button styling */
-#map button {
+#map book-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: bold;
   padding: 10px 20px;
   margin-bottom: 20px;
@@ -35,12 +35,12 @@
   transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
-#map button:hover {
+#map book-button:hover {
   background-color: #d62828;
   transform: scale(1.05);
 }
 
-#map button a {
+#map book-button a {
   color: inherit;
   text-decoration: none;
 }
@@ -80,6 +80,37 @@
 .leaflet-marker-icon:hover {
   transform: scale(1.2);
 }
+/* Back button styling */
+#back-button{
+  position: fixed;
+  top: 100px;
+  left: 20px;
+  background-color: #000000;
+
+  color: rgb(255, 255, 255);
+  border: none; 
+  padding: 15px; 
+  border-radius: 25%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+  transition: background 0.3s ease;
+
+}
+
+#back-button:hover {
+  background-color: #fff;
+  color: #000;
+}
+.book-now{ 
+  color: "white";
+  font-size: 20px;
+   text-decoration: none;
+   }
+
+
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {

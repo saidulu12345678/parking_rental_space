@@ -1,109 +1,50 @@
-/* General Container Styling */
-#book {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #f7f7f7;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-  }
-  
-  h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  /* Form Styling */
-  #book1 {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  #book1 form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  
-  #book1 form .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  #book1 label {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  #book1 input,
-  #book1 select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.3s ease;
-  }
-  
-  #book1 input:focus,
-  #book1 select:focus {
-    border-color: #4caf50;
-  }
-  
-  #int2 {
-    grid-column: span 2;
-    padding: 12px;
-    font-size: 16px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  #int2:hover {
-    background-color: #45a049;
-  }
-  
-  /* Booking Details Table */
-  #booking-details {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  #booking-details table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  #booking-details th,
-  #booking-details td {
-    padding: 12px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
-  #booking-details th {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  #booking-details tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  #booking-details tr:hover {
-    background-color: #f1f1f1;
-  }
-  
+.users-booking-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.users-booking-card {
+  width: 450px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.users-booking-title {
+  text-align: center;
+  color: #1890ff;
+  margin-bottom: 20px;
+}
+
+.vehicle-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: #e6f7ff;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: 500;
+  margin-top: 10px;
+  display: block;
+}
+
+.price-summary {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: #fffbe6;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+.confirm-button {
+  margin-top: 20px;
+}

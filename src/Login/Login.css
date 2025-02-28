@@ -1,0 +1,163 @@
+/* Login Container */
+.login-container {
+  max-width: 450px;
+  margin: 100px auto;
+  padding: 25px;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  filter: drop-shadow(0px 0px 2px #000);
+}
+
+/* Form Styling */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Heading */
+.login-form h2 {
+  color: #000000;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+/* Label Styling */
+.login-form label {
+  text-align: left;
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+}
+
+/* Input Fields */
+.login-form input {
+  width: 95%;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.login-form input:focus {
+  border: 1px solid #000000;
+  outline: none;
+}
+
+/* Password Wrapper */
+.password-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cbc4c4;
+  border-radius: 5px;
+  overflow: hidden;
+  outline: none;
+  /* border: none; */
+}
+
+.password-wrapper input {
+  border: none;
+  flex: 1;
+  padding: 12px;
+  outline: none;
+}
+
+.password-wrapper:focus-within {
+  border: 1px solid #000000;
+  border: none;
+  /* border: none; */
+}
+
+/* Toggle Password Button */
+/* Toggle Password Button */
+.toggle-password {
+  background: #000000; /* Blue background when password is hidden */
+  /* border: none; */
+  padding: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #ffffff;
+  border-radius: 5px;
+  transition: outline 0.3s ease;
+  /* border: 1px solid #aee0d0; */
+}
+
+.toggle-password:hover {
+  outline: 2px solid #000000; 
+  background-color: none;
+  color: #000000;
+  outline: none;
+  border: 1px solid #aee0d0;
+}
+
+/* .toggle-password:hover{
+  background-color: none;
+color: #333;
+} */
+
+/* Buttons */
+.login-button {
+  padding: 12px;
+  font-size: 16px;
+  color: rgb(251, 243, 243);
+  background: #929990;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.login-button:hover {
+  background: #aee0d0;
+  transform: scale(1.05);
+}
+
+.google-button {
+  padding: 12px;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  background: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.google-button:hover {
+  background: #454942;
+  transform: scale(1.05);
+}
+
+/* Link Styling */
+.login-form p {
+  margin-top: 10px;
+  font-size: 18px;
+  /* text-decoration: underline; */
+  /* gap: 10px; */
+}
+
+.login-form p a {
+  color: #0077f6;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.login-form p a:hover {
+  text-decoration: underline;
+}
+.toast-message{
+  background-color: rgb(107, 235, 107);
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .login-container {
+    width: 90%;
+    padding: 20px;
+  }
+}

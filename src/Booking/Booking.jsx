@@ -1,102 +1,232 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import "./Booking.css"; // Import the CSS file
+
+// import { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { Input, DatePicker, Button, Card, Typography, message } from "antd";
+// import dayjs from "dayjs";
+// import "./Booking.css"; 
+
+// const { Title, Text } = Typography;
+
+// const Book = () => {
+//   const navigate = useNavigate();
+//   const [selectedVehicle, setSelectedVehicle] = useState("");
+//   const [perHourPrice, setPerHourPrice] = useState(0);
+//   const [duration, setDuration] = useState(1);
+//   const [formData, setFormData] = useState({
+//     ownerName: "",
+//     phoneNumber: "",
+//     email: "",
+//     vehicleNumber: "",
+//     dateTime: "",
+//   });
+
+//   useEffect(() => {
+//     const storedVehicle = localStorage.getItem("selected_vehicle");
+//     const storedPrice = localStorage.getItem("vehicle_price");
+
+//     if (storedVehicle && storedPrice) {
+//       setSelectedVehicle(storedVehicle);
+//       setPerHourPrice(parseFloat(storedPrice));
+//     } else {
+//       navigate("/"); // Redirect if no vehicle is selected
+//     }
+//   }, [navigate]);
+
+//   const handleInputChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   const handleDateChange = (date, dateString) => {
+//     setFormData({ ...formData, dateTime: dateString });
+//   };
+
+//   const handleSubmit = () => {
+//     if (!formData.ownerName || !formData.phoneNumber || !formData.email || !formData.vehicleNumber || !formData.dateTime) {
+//       message.error("Please fill all the fields");
+//       return;
+//     }
+
+//     if (!/^[0-9]{10}$/.test(formData.phoneNumber)) {
+//       message.error("Enter a valid 10-digit phone number");
+//       return;
+//     }
+
+//     const totalAmount = perHourPrice * duration;
+
+//     const newBooking = { ...formData, vehicleType: selectedVehicle, perHourPrice, duration, totalAmount };
+//     const updatedBookings = JSON.parse(localStorage.getItem("booking_data") || "[]");
+//     updatedBookings.push(newBooking);
+
+//     localStorage.setItem("booking_data", JSON.stringify(updatedBookings));
+//     message.success(`Payment of ₹${totalAmount} successful! Booking confirmed.`);
+//     navigate("/my-bookings");
+//   };
+
+//   return (
+//     <div className="booking-container">
+//       <Card className="booking-card">
+//         <Title level={2} className="booking-title">Book Your Parking Spot</Title>
+
+//         <div className="vehicle-info">
+//           <Text strong>Selected Vehicle:</Text> <Text>{selectedVehicle}</Text>
+//           <Text strong>Per Hour Price:</Text> <Text>₹{perHourPrice}</Text>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Owner Name:</label>
+//           <Input name="ownerName" placeholder="Enter Owner Name" onChange={handleInputChange} />
+
+//           <label>Phone Number:</label>
+//           <Input name="phoneNumber" placeholder="Enter Phone Number" onChange={handleInputChange} maxLength={10} />
+
+//           <label>Email:</label>
+//           <Input name="email" placeholder="Enter Email" onChange={handleInputChange} />
+
+//           <label>Vehicle Number:</label>
+//           <Input name="vehicleNumber" placeholder="Enter Vehicle Number" onChange={handleInputChange} />
+
+//           <label>Date & Time:</label>
+//           <DatePicker showTime style={{ width: "100%" }} onChange={handleDateChange} />
+
+//           <label>Duration (Hours):</label>
+//           <Input type="number" min={1} value={duration} onChange={(e) => setDuration(e.target.value)} />
+//         </div>
+
+//         <div className="price-summary">
+//           <Text strong>Total Price:</Text> <Text>₹{perHourPrice} x {duration} = ₹{perHourPrice * duration}</Text>
+//         </div>
+
+//         <Button type="primary" onClick={handleSubmit} block className="confirm-button">
+//           Confirm & Pay
+//         </Button>
+//       </Card>
+//     </div>
+//   );
+// };
+
+// export default Book;
+
+
+
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Input, DatePicker, Button, Card, Typography, message } from "antd";
+import dayjs from "dayjs";
+import axios from "axios";
+import "./Booking.css";
+
+
+const { Title, Text } = Typography;
 
 const Book = () => {
-  const [a, seta] = useState([]); // State to store bookings
+  const navigate = useNavigate();
+  const [selectedVehicle, setSelectedVehicle] = useState("");
+  const [perHourPrice, setPerHourPrice] = useState(0);
+  const [duration, setDuration] = useState(1);
+  const [formData, setFormData] = useState({
+    ownerName: "",
+    phoneNumber: "",
+    email: "",
+    vehicleNumber: "",
+    dateTime: "",
+  });
 
-  const sub = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    const storedVehicle = localStorage.getItem("selected_vehicle");
+    const storedPrice = localStorage.getItem("vehicle_price");
 
-    const b = {
-      ownerName: e.target[0].value,
-      phoneNumber: e.target[1].value,
-      emailId: e.target[2].value,
-      vehicleNumber: e.target[3].value,
-      licenceNumber: e.target[4].value,
-      date: e.target[5].value,
-      vehicleType: e.target[6].value,
+    if (storedVehicle && storedPrice) {
+      setSelectedVehicle(storedVehicle);
+      setPerHourPrice(parseFloat(storedPrice));
+    } else {
+      navigate("/"); // Redirect if no vehicle is selected
+    }
+  }, [navigate]);
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleDateChange = (date, dateString) => {
+    setFormData({ ...formData, dateTime: dateString });
+  };
+
+  const handleSubmit = async () => {
+    if (!formData.ownerName || !formData.phoneNumber || !formData.email || !formData.vehicleNumber || !formData.dateTime) {
+      message.error("Please fill all the fields");
+      return;
+    }
+
+    if (!/^[0-9]{10}$/.test(formData.phoneNumber)) {
+      message.error("Enter a valid 10-digit phone number");
+      return;
+    }
+
+    const totalAmount = perHourPrice * duration;
+
+    const newBooking = {
+      ...formData,
+      vehicleType: selectedVehicle,
+      perHourPrice,
+      duration,
+      totalAmount,
     };
-    const updatedData = [...a, b]; // Update state with new booking
-    seta(updatedData);
-    localStorage.setItem("booking_data", JSON.stringify(updatedData)); // Save data to localStorage
-    alert("Details submitted successfully");
-    e.target.reset(); // Reset form after submission
+
+    try {
+      // ✅ Send booking data to the backend
+      const response = await axios.post("https://backend-parkpay.onrender.com/bookings", newBooking);
+
+      if (response.data.success) {
+        navigate("/Service/book/payment")
+       
+      } else {
+        message.error("Booking failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error storing booking:", error);
+      message.error("Error processing booking. Try again later.");
+    }
   };
 
   return (
-    <>
-      <div id="book">
-        <div id="book1">
-          <form action="" id="row" onSubmit={sub}>
-            <label htmlFor="ownerName">Owner Name</label>
-            <input type="text" placeholder="Owner Name" id="int1" required />
-            <br />
-            <br />
-            <label htmlFor="phoneNumber">Phone Number</label>
-            <input type="text" placeholder="Phone Number" id="int1" required />
-            <label htmlFor="emailId">Email ID</label>
-            <input type="email" placeholder="Email ID" id="int1" required />
-            <br />
-            <br />
-            <label htmlFor="vehicleNumber">Vehicle Number</label>
-            <input type="text" placeholder="Vehicle Number" id="int1" required />
-            <br />
-            <br />
-            <label htmlFor="licenceNumber">Licence Number</label>
-            <input type="text" placeholder="Licence Number" id="int1" required />
-            <br />
-            <br />
-            <label htmlFor="date">Date/Time</label>
-            <input type="datetime-local" id="int1" required />
-            <label htmlFor="vehicleType">Vehicle Type</label>
-            <select id="int1" required>
-              <option value="bike">Bike</option>
-              <option value="car">Car</option>
-              <option value="truck">Truck</option>
-              <option value="bus">Bus</option>
-            </select>
-            <br />
-            <input type="submit" value="Submit" id="int2" />
-          </form>
+    <div className="users-booking-container">
+      <Card className="users-booking-card">
+        <Title level={2} className="users-booking-title">Book Your Parking Spot</Title>
+
+        <div className="vehicle-info">
+          <Text strong>Selected Vehicle:</Text> <Text>{selectedVehicle}</Text>
+          <Text strong>Per Hour Price:</Text> <Text>₹{perHourPrice}</Text>
         </div>
 
-        {/* Display Booking Details */}
-        <div id="booking-details">
-          <h2>Booking Details</h2>
-          {a.length === 0 ? (
-            <p>No bookings yet.</p>
-          ) : (
-            <table>
-              <thead>
-                <tr>
-                  <th>Owner Name</th>
-                  <th>Phone Number</th>
-                  <th>Email ID</th>
-                  <th>Vehicle Number</th>
-                  <th>Licence Number</th>
-                  <th>Date/Time</th>
-                  <th>Vehicle Type</th>
-                </tr>
-              </thead>
-              <tbody>
-                {a.map((booking, index) => (
-                  <tr key={index}>
-                    <td>{booking.ownerName}</td>
-                    <td>{booking.phoneNumber}</td>
-                    <td>{booking.emailId}</td>
-                    <td>{booking.vehicleNumber}</td>
-                    <td>{booking.licenceNumber}</td>
-                    <td>{booking.date}</td>
-                    <td>{booking.vehicleType}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+        <div className="form-group">
+          <label>Owner Name:</label>
+          <Input name="ownerName" placeholder="Enter Owner Name" onChange={handleInputChange} />
+
+          <label>Phone Number:</label>
+          <Input name="phoneNumber" placeholder="Enter Phone Number" onChange={handleInputChange} maxLength={10} />
+
+          <label>Email:</label>
+          <Input name="email" placeholder="Enter Email" onChange={handleInputChange} />
+
+          <label>Vehicle Number:</label>
+          <Input name="vehicleNumber" placeholder="Enter Vehicle Number" onChange={handleInputChange} />
+
+          <label>Date & Time:</label>
+          <DatePicker showTime style={{ width: "100%" }} onChange={handleDateChange} />
+
+          <label>Duration (Hours):</label>
+          <Input type="number" min={1} value={duration} onChange={(e) => setDuration(Number(e.target.value))} />
         </div>
-      </div>
-    </>
+
+        <div className="price-summary">
+          <Text strong>Total Price:</Text> <Text>₹{perHourPrice} x {duration} = ₹{perHourPrice * duration}</Text>
+        </div>
+
+        <Button type="primary" onClick={handleSubmit} block className="confirm-button">
+          Confirm & Pay
+        </Button>
+      </Card>
+    </div>
   );
 };
 
