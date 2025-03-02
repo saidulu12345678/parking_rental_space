@@ -1,7 +1,4 @@
 /* SignUp Container */
-.signup-body{
-  background-image: linear-gradient(to left,#62bbd5,#fff,#5bbae3); 
-}
 .signup-container {
   max-width: 430px;
   margin: 70px auto;

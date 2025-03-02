@@ -232,11 +232,13 @@
         localStorage.setItem("username", username);
   
         if (username === "Saidulu" && password === "Saigoud@7780") {
+          
           navigate("/admin");
         } else {
+          
           navigate("/");
         }
-      } catch {
+      } catch {     
         alert("Invalid credentials. Try again!");
       }
     };
@@ -280,9 +282,9 @@
             <Button type="primary" htmlType="submit" className="login-button">
               Login
             </Button>
-            <Button type="default" onClick={signInWithGoogle} className="google-button">
+            {/* <Button type="default" onClick={signInWithGoogle} className="google-button">
               Sign In with Google
-            </Button>
+            </Button> */}
             <p>
               Don't have an account? <Link to="/signup">Sign Up</Link>
             </p>

@@ -55,40 +55,44 @@ import { UserOutlined } from "@ant-design/icons";
 import "./profile.css"; // Import external CSS
 
 const Profile = () => {
-  const [admin, setAdmin] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [admin, setAdmin] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // Simulated admin username (from local storage or API)
-  const loggedInAdmin = localStorage.getItem("adminUsername") || "Admin";
+  // // Simulated admin username (from local storage or API)
+  // const loggedInAdmin = JSON.parse(localStorage.getItem("adminUsername")) || "Admin";
 
-  useEffect(() => {
-    // Simulate fetching admin details (replace with actual API call)
-    setTimeout(() => {
-      setAdmin({
-        username: loggedInAdmin,
-        email: "admin@example.com",
-        profilePic: "https://via.placeholder.com/150", // Replace with actual admin profile pic URL
-      });
-      setLoading(false);
-    }, 1000); // Simulating a 1-second API response time
-  }, [loggedInAdmin]);
+  // useEffect(() => {
+  //   let isMounted = true; // Flag to prevent state update if component unmounts
+  //   const timeout = setTimeout(() => {
+  //     if (isMounted) {
+  //       setAdmin(loggedInAdmin);
+  //       setLoading(false);
+  //     }
+  //   }, 1000);
 
+  //   // Cleanup function to clear timeout and avoid memory leaks
+  //   return () => {
+  //     isMounted = false;
+  //     clearTimeout(timeout);
+  //   };
+  // }, [loggedInAdmin]); // Runs only once on mount
+  // console.log(admin);
   return (
     <Layout className="admins-profile-container">
       <div className="admins-profile-card">
-        <h2>Welcome, {admin?.username} 👋</h2>
+        <h2>Welcome, Saidulu 👋</h2>
 
         {loading ? (
           <Spin size="large" />
         ) : (
           <Card className="ad-profile-card">
-            <Avatar
+            {/* <Avatar
               size={100}
               src={admin?.profilePic}
               icon={!admin?.profilePic && <UserOutlined />}
-            />
-            <p><strong>Username:</strong> {admin?.username}</p>
-            <p><strong>Email:</strong> {admin?.email}</p>
+            /> */}
+            <p><strong>Username:</strong> Saidulu</p>
+            <p><strong>Email:</strong>reddymallasaidulu99@gmail.com</p>
           </Card>
         )}
       </div>

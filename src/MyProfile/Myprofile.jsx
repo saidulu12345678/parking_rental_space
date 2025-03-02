@@ -88,8 +88,9 @@
   // export default Profile;
 
 
-  import React, { useEffect, useState } from "react";
+  import  { useEffect, useState } from "react";
   import "./Myprofile.css"; // Import the external CSS file
+import { ConnectingAirportsOutlined, ControlCameraSharp } from "@mui/icons-material";
   
   const Profile = () => {
     const [user, setUser] = useState(null);
@@ -97,25 +98,10 @@
   
     // Get logged-in username from localStorage
     const loggedInUsername = localStorage.getItem("username");
+    console.log(loggedInUsername);
   
     useEffect(() => {
-      if (!loggedInUsername) return;
-  
-      // Fetch user details
-      fetch(`https://backend-parkpay.onrender.com/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username: loggedInUsername }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.length > 0) {
-            setUser(data[0]);
-          }
-        })
-        .catch((err) => console.error("Error fetching user:", err));
+      
   
       // Fetch only the logged-in user's bookings
       fetch(`https://backend-parkpay.onrender.com/bookings`)
@@ -128,20 +114,42 @@
         })
         .catch((err) => console.error("Error fetching bookings:", err));
     }, [loggedInUsername]);
+
+    const getEmail = async () => {
+      try {
+          const res = await fetch("http://localhost:3001/email");
+          if (!res.ok) throw new Error("Failed to fetch email");
+          
+          const data = await res.json();
+          setUser(data)
+      } catch (error) {
+          console.error("Error fetching email:", error);
+      }
+  };
   
+  useEffect(() => {
+      if (loggedInUsername) {  // Ensure it's defined before calling
+          getEmail();
+      }
+  }, [loggedInUsername]);
+  console.log(user);
+  const filterData = (Array.isArray(user) ? user : []).find((element) => element.username === loggedInUsername);
+
+  console.log(filterData);
+  console.log(filterData.email);
     return (
       <div className="container">
         <h2 className="my-bookings-title">User Profile</h2>
   
-        {user ? (
+        {loggedInUsername? (
           <div className="profile-box">
-            <img
+            {/* <img
               src={user.profilePic || "https://via.placeholder.com/100"} // Placeholder image
               alt="User"
               className="user-image"
-            />
-            <p><strong>Username:</strong> {user.username}</p>
-            <p><strong>Email:</strong> {user.email}</p>
+            /> */}
+            <p><strong>Username:</strong> {loggedInUsername}</p>
+            <p><strong>Email:</strong> {filterData.email}</p>
           </div>
         ) : (
           <p>Loading user details...</p>
