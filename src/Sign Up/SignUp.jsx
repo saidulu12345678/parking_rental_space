@@ -1,7 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import "../Sign Up/SignUp.css"
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../Sign Up/SignUp.css";
 
 const SignUp = () => {
   const [state, setState] = useState({
@@ -24,15 +26,18 @@ const SignUp = () => {
 
     if (!username || !usernameRegex.test(username)) {
       newErrors.username = "Invalid Username: Use 3-15 characters (letters, numbers, or underscores).";
+      toast.error(newErrors.username)
     }
 
     if (!email || !emailRegex.test(email)) {
-      newErrors.email = "Invalid Email: Enter a valid email address.";
+      newErrors.email = "Enter a valid email address.";
+      toast.error( newErrors.email);
     }
 
     if (!password || !passwordRegex.test(password)) {
       newErrors.password =
-        "Invalid Password: Must be at least 8 characters, with at least 1 letter, 1 number, and 1 special character (@, $, !, %, *, ?, &).";
+        "Must be at least 8 characters, with at least 1 letter, 1 number, and 1 special character.";
+        toast.error(newErrors.password)
     }
 
     return newErrors;
@@ -57,20 +62,26 @@ const SignUp = () => {
     try {
       const response = await axios.post("https://backend-parkpay.onrender.com/register", state);
       console.log(response.data);
-      alert("Registration successful! Please log in.");
-      navigate("/login");
+      toast.success("Registration successful! Please log in.");
+      setTimeout(() => navigate("/login"), 2000);
     } catch (error) {
       console.error("Registration Error:", error);
-      alert("Registration failed. Please try again.");
+
+      if (error.response && error.response.data === "User already exists") {
+        toast.error("User already exists! Please login.");
+      } else {
+        toast.error("Registration failed. Please try again.");
+      }
     }
   };
 
   return (
-    // <>
+    <>
+      <ToastContainer position="top-right" autoClose={3000} />
       <div className="signup-body">
         <div className="signup-container">
           <form onSubmit={handleSubmit} className="signup-form">
-            <h2>Sign Up</h2>
+      
 
             <label htmlFor="username">Username</label>
             <input
@@ -81,7 +92,7 @@ const SignUp = () => {
               value={state.username}
               onChange={handleChange}
             />
-            {errors.username && <p className="error">{errors.username}</p>}
+      
 
             <label htmlFor="email">Email</label>
             <input
@@ -92,7 +103,7 @@ const SignUp = () => {
               value={state.email}
               onChange={handleChange}
             />
-            {errors.email && <p className="error">{errors.email}</p>}
+       
 
             <label htmlFor="password">Password</label>
             <input
@@ -103,7 +114,7 @@ const SignUp = () => {
               value={state.password}
               onChange={handleChange}
             />
-            {errors.password && <p className="error">{errors.password}</p>}
+        
 
             <button type="submit" className="signup-button">Sign Up</button>
 
@@ -113,7 +124,7 @@ const SignUp = () => {
           </form>
         </div>
       </div>
-    // </>
+    </>
   );
 };
 
