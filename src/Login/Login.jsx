@@ -11,25 +11,28 @@ import { Button } from "antd";
 import { initializeApp } from "firebase/app";
 import "./Login.css";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCl8GfCzd4R2fJr365tD3lSPmydt",
-  authDomain: "parkpay-e7272.firebaseapp.com",
-  projectId: "parkpay-e7272",
-  storageBucket: "parkpay-e7272.firebasestorage.app",
-  messagingSenderId: "416675067737",
-  appId: "1:416675067737:web:41375e887e74462b407e48",
-  measurementId: "G-Z2YQHHEMM8",
-};
-
-initializeApp(firebaseConfig);
-const auth = getAuth();
-const provider = new GoogleAuthProvider();
 
 const Login = () => {
+
+
   const { setIsLogin, setUsername } = useContext(AuthContext);
   const [state, setState] = useState({ username: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const firebaseConfig = {
+    apiKey: "AIzaSyCl8GfCzd4R2fJr365tD3lSPmydtatdAq8",
+    authDomain: "parkpay-e7272.firebaseapp.com",
+    projectId: "parkpay-e7272",
+    storageBucket: "parkpay-e7272.firebasestorage.app",
+    messagingSenderId: "416675067737",
+    appId: "1:416675067737:web:41375e887e74462b407e48",
+    measurementId: "G-Z2YQHHEMM8"
+  };
+  
+  initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -114,6 +117,7 @@ const Login = () => {
           <Button type="primary" htmlType="submit" className="login-button">
             Login
           </Button>
+          <button onClick={signInWithGoogle}>sign up with Google</button>
           <p>
             Don't have an account? <Link to="/signup">Sign Up</Link>
           </p>

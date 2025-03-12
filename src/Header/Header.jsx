@@ -80,6 +80,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "./Header.css";
 import { AuthContext } from "../AuthContext";
+import image from "./log.png"
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -129,7 +130,7 @@ const Header = () => {
 
   return (
     <header className="header">
-      <img src="../log.png" alt="Logo" className="logo" />
+      <img src={image} alt="Logo" className="logo" />
 
       <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>☰</button>
 
